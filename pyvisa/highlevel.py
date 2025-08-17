@@ -2781,7 +2781,26 @@ class VisaLibraryBase(object):
 
         """
         raise NotImplementedError
+    
+    def query_srq(self, session) -> Tuple[bool, StatusCode]:
+        """Return whether the GPIB SRQ line is asserted for the given session.
 
+        Parameters
+        ----------
+        session : VISASession
+            A session handle previously returned by open_bare_resource/open.
+
+        Returns
+        -------
+        bool
+            True if SRQ is asserted, False otherwise.
+
+        Notes
+        -----
+        Backends that cannot implement SRQ should raise NotImplementedError.
+        """
+        raise NotImplementedError
+    
 
 def list_backends() -> List[str]:
     """Return installed backends.
