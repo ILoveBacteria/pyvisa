@@ -173,6 +173,11 @@ class GPIBInstrument(_GPIBMixin, MessageBasedResource):
             constants.EventType.service_request, constants.EventMechanism.queue
         )
 
+    def query_srq(self) -> bool:
+        """Return True if SRQ is asserted on the bus (backend must implement)."""
+        srq, status = self.visalib.query_srq(self.session)
+        return srq
+
 
 @Resource.register(constants.InterfaceType.gpib, "INTFC")
 class GPIBInterface(_GPIBMixin, MessageBasedResource):
